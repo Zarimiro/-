@@ -1,0 +1,102 @@
+#include <iostream>
+#include <stdlib.h>
+#include<cstring>
+using namespace std;
+
+class Student {
+    char name[64];
+    unsigned int mark[4];
+public:
+    bool pay=false;
+    Student() {
+        name[0] = 0;
+        for (unsigned i = 0; i < 4; ++i) {
+            mark[i] = 0;
+        }
+    }
+
+    Student(char buf_name[], unsigned buf_mark[4]) {
+        strcpy(name, buf_name);
+        for (unsigned i = 0; i < 5; ++i) {
+            this->mark[i] = buf_mark[i];
+        }
+    }
+
+    void setmarks(char buf_name[], unsigned buf_mark[4]) {
+        strcpy(name, buf_name);
+        for (unsigned i = 0; i < 4; ++i) {
+            this->mark[i] = buf_mark[i];
+        }
+    }
+
+    void print() {
+        cout << "Name: " << name << endl << "Marks for latest session: ";
+        for (unsigned i = 0; i < 4; ++i) {
+            cout << mark[i] << ", ";
+        }
+        cout << endl;
+    }
+    void payment(){
+        unsigned buf=0;
+        for(unsigned i=0;i<4;++i){
+            if(mark[i]>3) buf++;
+        }
+        if(buf==4) {
+            cout<<"Student "<<name<<" gets payment."<<endl;
+            bool pay=true;
+        }
+        else cout<<"Student "<<name<<" doesn't get payment."<<endl;
+    }
+
+};
+
+
+    int main(){
+        unsigned mark1[4];
+        unsigned mark2[4];
+        char buf1[64],buf2[64];
+        cout<<"\nEnter 1st student name:";
+        cin.getline(buf1,63);
+       // if(scanf("%c",&buf1[64]))
+          //  cout;
+      //  else exit(1);
+
+        cout<<"\nEnter 2nd student name:";
+        cin.getline(buf2,63);
+       // if(scanf("%c",&buf2[64]))
+       //     cout;
+       // else exit(1);
+
+
+        cout<<"\nEnter marks of 1st student:";
+            for(unsigned i=0;i<4;++i){
+                cout<<"\n Mark "<<i+1<<":";
+                if(scanf("%d",&mark1[i]))
+                    cout;
+                else exit(1);
+            }
+
+        cout<<"\nEnter marks of 2nd student:";
+            for(unsigned i=0;i<4;++i){
+                cout<<"\n Mark "<<i+1<<":";
+                if(scanf("%d",&mark2[i]))
+                    cout;
+                else exit(1);
+            }
+
+
+    Student markov(buf1,mark1);
+        Student vlas(buf2,mark2);
+
+        markov.print();
+        vlas.print();
+        markov.payment();
+        vlas.payment();
+        cout<<"Getting paid: ";
+        if(markov.pay==true){markov.print();};
+        if(vlas.pay==true){vlas.print();};
+
+
+
+    return 0;
+}
